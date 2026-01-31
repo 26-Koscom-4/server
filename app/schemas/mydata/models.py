@@ -29,8 +29,14 @@ class CompletionItem(BaseSchema):
     status: str
 
 
+class IntegratedInstitution(BaseSchema):
+    id: str
+    name: str
+    icon: str
+
+
 class MydataIntegration(BaseSchema):
     is_integrated: bool
     last_integration_date: Optional[str]
-    integrated_institutions: List[str]
+    integrated_institutions: List[IntegratedInstitution]
     integration_count: int

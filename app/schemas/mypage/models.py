@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional
 
 from app.schemas.common.base import BaseSchema
+from app.schemas.mydata.models import IntegratedInstitution
 
 
 class UserProfile(BaseSchema):
@@ -33,7 +34,7 @@ class Activity(BaseSchema):
 class MydataIntegration(BaseSchema):
     is_integrated: bool
     last_integration_date: Optional[str]
-    integrated_institutions: List[str]
+    integrated_institutions: List[IntegratedInstitution]
     integration_count: int
 
 

@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 from app.schemas.common.base import BaseSchema
 
@@ -36,7 +36,7 @@ class TestState(BaseSchema):
 
 class TestResult(BaseSchema):
     scores: Dict[str, int]
-    percentages: Dict[str, str]
+    percentages: Dict[str, Union[str, int, float]]
     mainType: str
 
 

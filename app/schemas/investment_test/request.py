@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 
 from pydantic import ConfigDict
 
@@ -9,7 +9,7 @@ class InvestmentTestResultRequest(BaseSchema):
     completed: Optional[bool] = None
     date: Optional[str] = None
     mainType: Optional[str] = None
-    percentages: Optional[Dict[str, str]] = None
+    percentages: Optional[Dict[str, Union[str, int, float]]] = None
 
     model_config = ConfigDict(
         extra="forbid",
