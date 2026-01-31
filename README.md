@@ -15,6 +15,11 @@ uvicorn app.main:app --reload
 uvicorn app.main:app --reload
 ```
 
+## API docs
+
+- Swagger UI: http://127.0.0.1:8000/docs
+- 각 request/response는 Pydantic v2 스키마로 문서화되며, examples가 표시됩니다.
+
 ## Endpoints
 
 - GET /health

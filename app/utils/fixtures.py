@@ -20,6 +20,6 @@ def load_fixture(filename: str) -> Dict[str, Any]:
     if not path.exists():
         raise FixtureNotFound(filename=filename)
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8-sig"))
     except JSONDecodeError as exc:
         raise FixtureInvalid(filename=filename, reason=str(exc)) from exc
