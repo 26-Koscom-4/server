@@ -1,0 +1,215 @@
+{
+  "villages": [
+    {
+      "id": "village-us",
+      "name": "미장마을",
+      "icon": "🇺🇸",
+      "assets": [
+        {
+          "id": "AAPL",
+          "name": "AAPL",
+          "type": "기술주",
+          "value": 4000000,
+          "ticker": "AAPL"
+        },
+        {
+          "id": "TSLA",
+          "name": "TSLA",
+          "type": "성장주",
+          "value": 3500000,
+          "ticker": "TSLA"
+        },
+        {
+          "id": "NVDA",
+          "name": "NVDA",
+          "type": "AI주",
+          "value": 4500000,
+          "ticker": "NVDA"
+        },
+        {
+          "id": "MSFT",
+          "name": "MSFT",
+          "type": "기술주",
+          "value": 3000000,
+          "ticker": "MSFT"
+        }
+      ],
+      "type": "growth",
+      "goal": "long-term",
+      "totalValue": 15000000,
+      "returnRate": 12.5,
+      "allocation": 32.3,
+      "lastBriefingRead": null
+    },
+    {
+      "id": "village-dividend",
+      "name": "배당마을",
+      "icon": "💰",
+      "assets": [
+        {
+          "id": "O",
+          "name": "O",
+          "type": "배당ETF",
+          "value": 3000000,
+          "ticker": "O"
+        },
+        {
+          "id": "SCHD",
+          "name": "SCHD",
+          "type": "배당ETF",
+          "value": 3000000,
+          "ticker": "SCHD"
+        },
+        {
+          "id": "VYM",
+          "name": "VYM",
+          "type": "배당ETF",
+          "value": 2000000,
+          "ticker": "VYM"
+        }
+      ],
+      "type": "dividend",
+      "goal": "passive-income",
+      "totalValue": 8000000,
+      "returnRate": 8.3,
+      "allocation": 17.2,
+      "lastBriefingRead": null
+    },
+    {
+      "id": "village-leverage",
+      "name": "레버리지마을",
+      "icon": "🚀",
+      "assets": [
+        {
+          "id": "TQQQ",
+          "name": "TQQQ",
+          "type": "레버리지ETF",
+          "value": 2000000,
+          "ticker": "TQQQ"
+        },
+        {
+          "id": "UPRO",
+          "name": "UPRO",
+          "type": "레버리지ETF",
+          "value": 1500000,
+          "ticker": "UPRO"
+        },
+        {
+          "id": "SOXL",
+          "name": "SOXL",
+          "type": "레버리지ETF",
+          "value": 1500000,
+          "ticker": "SOXL"
+        }
+      ],
+      "type": "leverage",
+      "goal": "high-risk",
+      "totalValue": 5000000,
+      "returnRate": -5.2,
+      "allocation": 10.8,
+      "lastBriefingRead": null
+    },
+    {
+      "id": "village-korea",
+      "name": "국장마을",
+      "icon": "🇰🇷",
+      "assets": [
+        {
+          "id": "005930",
+          "name": "삼성전자",
+          "type": "한국주식",
+          "value": 2000000,
+          "ticker": "005930.KS"
+        },
+        {
+          "id": "000660",
+          "name": "SK하이닉스",
+          "type": "한국주식",
+          "value": 1500000,
+          "ticker": "000660.KS"
+        },
+        {
+          "id": "NAVER",
+          "name": "NAVER",
+          "type": "한국주식",
+          "value": 1500000,
+          "ticker": "035420.KS"
+        }
+      ],
+      "type": "domestic",
+      "goal": "balanced",
+      "totalValue": 5000000,
+      "returnRate": 6.8,
+      "allocation": 10.8,
+      "lastBriefingRead": null
+    },
+    {
+      "id": "village-global-etf",
+      "name": "글로벌ETF마을",
+      "icon": "🌍",
+      "assets": [
+        {
+          "id": "VTI",
+          "name": "VTI",
+          "type": "성장ETF",
+          "value": 3000000,
+          "ticker": "VTI"
+        },
+        {
+          "id": "QQQ",
+          "name": "QQQ",
+          "type": "성장ETF",
+          "value": 2500000,
+          "ticker": "QQQ"
+        },
+        {
+          "id": "SPY",
+          "name": "SPY",
+          "type": "성장ETF",
+          "value": 2000000,
+          "ticker": "SPY"
+        }
+      ],
+      "type": "etf",
+      "goal": "diversification",
+      "totalValue": 7500000,
+      "returnRate": 9.2,
+      "allocation": 16.1,
+      "lastBriefingRead": null
+    },
+    {
+      "id": "village-semiconductor",
+      "name": "반도체마을",
+      "icon": "🔬",
+      "assets": [
+        {
+          "id": "TSM",
+          "name": "TSM",
+          "type": "기술주",
+          "value": 2500000,
+          "ticker": "TSM"
+        },
+        {
+          "id": "ASML",
+          "name": "ASML",
+          "type": "기술주",
+          "value": 2000000,
+          "ticker": "ASML"
+        },
+        {
+          "id": "AMD",
+          "name": "AMD",
+          "type": "AI주",
+          "value": 1500000,
+          "ticker": "AMD"
+        }
+      ],
+      "type": "semiconductor",
+      "goal": "sector-focus",
+      "totalValue": 6000000,
+      "returnRate": 15.3,
+      "allocation": 12.9,
+      "lastBriefingRead": null
+    }
+  ]
+}

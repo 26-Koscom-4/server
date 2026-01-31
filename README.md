@@ -9,6 +9,30 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## Run
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+## Endpoints
+
+- GET /health
+- GET /api/main
+- GET /api/villages
+- GET /api/briefing
+- GET /api/daily
+- GET /api/neighbors
+- GET /api/mypage
+- GET /api/villages/{id}
+- GET /api/investment-test
+- GET /api/mydata
+- POST /api/login
+- POST /api/logout
+- POST /api/villages
+- POST /api/investment-test/result
+- POST /api/mydata/complete
+
 ## Project layout
 
 - `app/main.py`: FastAPI app entry

@@ -1,0 +1,108 @@
+{
+  "selector": {
+    "villages": [
+      {
+        "id": "village-us",
+        "name": "미장마을",
+        "icon": "🇺🇸",
+        "returnRate": 12.5
+      },
+      {
+        "id": "village-dividend",
+        "name": "배당마을",
+        "icon": "💰",
+        "returnRate": 8.3
+      },
+      {
+        "id": "village-leverage",
+        "name": "레버리지마을",
+        "icon": "🚀",
+        "returnRate": -5.2
+      },
+      {
+        "id": "village-korea",
+        "name": "국장마을",
+        "icon": "🇰🇷",
+        "returnRate": 6.8
+      },
+      {
+        "id": "village-global-etf",
+        "name": "글로벌ETF마을",
+        "icon": "🌍",
+        "returnRate": 9.2
+      },
+      {
+        "id": "village-semiconductor",
+        "name": "반도체마을",
+        "icon": "🔬",
+        "returnRate": 15.3
+      }
+    ]
+  },
+  "typeTextMap": {
+    "growth": "성장형",
+    "dividend": "배당형",
+    "leverage": "레버리지형",
+    "domestic": "국내주식",
+    "etf": "글로벌 ETF",
+    "semiconductor": "반도체 섹터"
+  },
+  "goalTextMap": {
+    "long-term": "장기 투자",
+    "passive-income": "배당 수익",
+    "high-risk": "고위험/고수익",
+    "balanced": "균형 투자",
+    "diversification": "분산 투자",
+    "sector-focus": "섹터 집중"
+  },
+  "adviceMap": {
+    "growth": "성장주는 장기적인 관점에서 접근하세요. 단기 변동성에 흔들리지 않는 게 중요합니다.",
+    "dividend": "배당주는 안정적인 현금 흐름을 제공하며 배당락일 체크가 필요합니다.",
+    "leverage": "레버리지 상품은 변동성이 크니 리스크 관리가 중요합니다.",
+    "domestic": "국내 시장의 지표 변화와 대외 변수를 함께 확인하세요.",
+    "etf": "글로벌 분산 투자로 리스크를 줄이고 안정적인 수익을 추구하세요.",
+    "semiconductor": "반도체 업황과 글로벌 수요 지표를 주의 깊게 살펴보세요."
+  },
+  "marketAdviceMap": {
+    "growth": "📈 기술주 중심 포트폴리오입니다. 실적 발표 일정에 주목하세요.",
+    "dividend": "💰 배당락일이 가까우니 배당 일정과 수익률을 확인하세요.",
+    "leverage": "⚠️ VIX 지수가 상승 중입니다. 변동성 관리가 필요합니다.",
+    "domestic": "🇰🇷 국내 증시 변동성이 커질 수 있습니다.",
+    "etf": "🌍 글로벌 시장이 안정적으로 보이고 있습니다.",
+    "semiconductor": "🔬 반도체 업황 지표를 체크하세요."
+  },
+  "selectedVillage": {
+    "id": "village-us",
+    "name": "미장마을",
+    "icon": "🇺🇸",
+    "totalValue": 15000000,
+    "returnRate": 12.5,
+    "allocation": 32.3,
+    "assets": [
+      {
+        "id": "AAPL",
+        "name": "AAPL",
+        "type": "기술주",
+        "ticker": "AAPL"
+      },
+      {
+        "id": "TSLA",
+        "name": "TSLA",
+        "type": "성장주",
+        "ticker": "TSLA"
+      },
+      {
+        "id": "NVDA",
+        "name": "NVDA",
+        "type": "AI주",
+        "ticker": "NVDA"
+      },
+      {
+        "id": "MSFT",
+        "name": "MSFT",
+        "type": "기술주",
+        "ticker": "MSFT"
+      }
+    ]
+  }
+}

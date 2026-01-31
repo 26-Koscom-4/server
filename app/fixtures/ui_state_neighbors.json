@@ -1,0 +1,52 @@
+﻿{
+  "recommendations": [
+    {
+      "id": "commodities",
+      "villageId": "village-commodities",
+      "name": "원자재 마을",
+      "subtitle": "금, 은, 원유 ETF",
+      "reason": "현재 포트폴리오가 기술주에 집중되어 있습니다. 원자재는 인플레이션 헷지와 포트폴리오 다각화에 효과적입니다.",
+      "assets": [
+        { "id": "GLD", "ticker": "GLD", "label": "금 ETF" },
+        { "id": "SLV", "ticker": "SLV", "label": "은 ETF" },
+        { "id": "USO", "ticker": "USO", "label": "원유 ETF" }
+      ],
+      "correlation": -0.23,
+      "correlationNote": "낮은 상관관계 = 분산 효과 우수",
+      "addVillageName": "원자재 마을",
+      "addVillageId": "village-commodities"
+    },
+    {
+      "id": "emerging",
+      "villageId": "village-emerging",
+      "name": "신흥국 마을",
+      "subtitle": "인도, 베트남, 브라질",
+      "reason": "미국 시장 편중도가 높습니다. 신흥국은 높은 성장 잠재력과 지리적 다각화를 제공합니다.",
+      "assets": [
+        { "id": "EPI", "ticker": "EPI", "label": "인도" },
+        { "id": "VNM", "ticker": "VNM", "label": "베트남" },
+        { "id": "EWZ", "ticker": "EWZ", "label": "브라질" }
+      ],
+      "correlation": -0.15,
+      "correlationNote": "지리적 분산 효과",
+      "addVillageName": "신흥국 마을",
+      "addVillageId": "village-emerging"
+    },
+    {
+      "id": "bonds",
+      "villageId": "village-bonds",
+      "name": "채권 마을",
+      "subtitle": "안전자산 포트폴리오",
+      "reason": "주식 비중이 90% 이상입니다. 채권은 하방 리스크를 줄이고 안정적인 수익을 제공합니다.",
+      "assets": [
+        { "id": "AGG", "ticker": "AGG", "label": "종합채권" },
+        { "id": "TLT", "ticker": "TLT", "label": "장기국채" },
+        { "id": "HYG", "ticker": "HYG", "label": "하이일드" }
+      ],
+      "correlation": -0.4,
+      "correlationNote": "역상관 = 최고의 헷징 효과",
+      "addVillageName": "채권 마을",
+      "addVillageId": "village-bonds"
+    }
+  ]
+}

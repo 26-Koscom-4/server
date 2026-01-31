@@ -1,0 +1,166 @@
+{
+  "hero": {
+    "title": "개미 마을",
+    "subtitle": "방치된 내 주식, 개미 마을이 깨워줍니다.",
+    "cta": {
+      "label": "내 마을 시작하기 🚀",
+      "targetPage": "villages"
+    }
+  },
+  "recommendation": {
+    "hasNewRecommendation": true,
+    "lastCheckedDate": null,
+    "recommendedVillages": [
+      "원자재 마을",
+      "신흥국 마을",
+      "채권 마을"
+    ],
+    "bannerVisible": true
+  },
+  "map": {
+    "title": "전 세계 나의 투자 마을",
+    "hotspots": [
+      {
+        "id": "hotspot-korea",
+        "villageName": "국장마을",
+        "badgeId": "badge-국장마을",
+        "unreadBadgeVisible": true,
+        "villageId": "village-korea"
+      },
+      {
+        "id": "hotspot-usa",
+        "villageName": "미장마을",
+        "badgeId": "badge-미장마을",
+        "unreadBadgeVisible": true,
+        "villageId": "village-us"
+      },
+      {
+        "id": "hotspot-europe",
+        "villageName": "배당마을",
+        "badgeId": "badge-배당마을",
+        "unreadBadgeVisible": true,
+        "villageId": "village-dividend"
+      },
+      {
+        "id": "hotspot-asia",
+        "villageName": "글로벌ETF마을",
+        "badgeId": "badge-글로벌ETF마을",
+        "unreadBadgeVisible": true,
+        "villageId": "village-global-etf"
+      }
+    ]
+  },
+  "assetChart": {
+    "type": "doughnut",
+    "data": {
+      "labels": [
+        "기술주",
+        "성장주",
+        "AI주",
+        "배당ETF",
+        "레버리지ETF",
+        "한국주식",
+        "성장ETF"
+      ],
+      "datasets": [
+        {
+          "data": [
+            11500000,
+            3500000,
+            6000000,
+            8000000,
+            5000000,
+            5000000,
+            7500000
+          ],
+          "backgroundColor": [
+            "rgba(78, 205, 196, 0.8)",
+            "rgba(155, 89, 182, 0.8)",
+            "rgba(255, 210, 63, 0.8)",
+            "rgba(255, 107, 53, 0.8)",
+            "rgba(52, 152, 219, 0.8)",
+            "rgba(231, 76, 60, 0.8)",
+            "rgba(247, 147, 30, 0.8)"
+          ],
+          "borderWidth": 3,
+          "borderColor": "#fff",
+          "hoverOffset": 15
+        }
+      ]
+    },
+    "options": {
+      "responsive": true,
+      "maintainAspectRatio": true,
+      "plugins": {
+        "legend": {
+          "display": false
+        },
+        "tooltip": {
+          "backgroundColor": "rgba(0, 0, 0, 0.8)",
+          "padding": 12,
+          "titleFont": {
+            "size": 14
+          },
+          "bodyFont": {
+            "size": 13
+          }
+        }
+      },
+      "cutout": "60%"
+    }
+  },
+  "assetLegend": {
+    "totalAssets": 46500000,
+    "items": [
+      {
+        "label": "기술주",
+        "value": 11500000,
+        "percentage": 24.7,
+        "icon": "💻",
+        "color": "rgba(78, 205, 196, 0.8)"
+      },
+      {
+        "label": "성장주",
+        "value": 3500000,
+        "percentage": 7.5,
+        "icon": "🚀",
+        "color": "rgba(155, 89, 182, 0.8)"
+      },
+      {
+        "label": "AI주",
+        "value": 6000000,
+        "percentage": 12.9,
+        "icon": "🤖",
+        "color": "rgba(255, 210, 63, 0.8)"
+      },
+      {
+        "label": "배당ETF",
+        "value": 8000000,
+        "percentage": 17.2,
+        "icon": "💰",
+        "color": "rgba(255, 107, 53, 0.8)"
+      },
+      {
+        "label": "레버리지ETF",
+        "value": 5000000,
+        "percentage": 10.8,
+        "icon": "⚡",
+        "color": "rgba(52, 152, 219, 0.8)"
+      },
+      {
+        "label": "한국주식",
+        "value": 5000000,
+        "percentage": 10.8,
+        "icon": "🇰🇷",
+        "color": "rgba(231, 76, 60, 0.8)"
+      },
+      {
+        "label": "성장ETF",
+        "value": 7500000,
+        "percentage": 16.1,
+        "icon": "📈",
+        "color": "rgba(247, 147, 30, 0.8)"
+      }
+    ]
+  }
+}

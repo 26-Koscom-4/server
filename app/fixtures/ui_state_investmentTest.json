@@ -1,0 +1,1288 @@
+{
+  "investmentTypes": {
+    "conservative": {
+      "name": "안정형",
+      "icon": "🛡️",
+      "description": "안정적인 수익을 추구하며 원금 보존을 최우선으로 생각합니다. 위험을 최소화하고 예측 가능한 투자를 선호합니다.",
+      "characteristics": [
+        "원금 손실을 극도로 회피",
+        "안정적이고 예측 가능한 수익 추구",
+        "장기적 관점의 보수적 투자",
+        "높은 유동성과 안정성 중시"
+      ],
+      "portfolios": [
+        "배당마을",
+        "채권 마을"
+      ]
+    },
+    "moderateConservative": {
+      "name": "안정추구형",
+      "icon": "🌱",
+      "description": "안정성을 중시하되, 적절한 수익을 위해 제한적인 위험을 감수할 수 있습니다.",
+      "characteristics": [
+        "안정성을 우선하되 수익도 추구",
+        "제한적인 위험 감수 가능",
+        "분산 투자를 통한 리스크 관리",
+        "중장기 투자 선호"
+      ],
+      "portfolios": [
+        "배당마을",
+        "글로벌ETF마을",
+        "채권 마을"
+      ]
+    },
+    "moderate": {
+      "name": "위험중립형",
+      "icon": "⚖️",
+      "description": "안정성과 수익성의 균형을 추구하며, 적절한 위험 관리 하에 다양한 투자를 고려합니다.",
+      "characteristics": [
+        "안정성과 수익성의 균형 추구",
+        "중간 수준의 위험 감수",
+        "다양한 자산군에 분산 투자",
+        "시장 상황에 따른 유연한 대응"
+      ],
+      "portfolios": [
+        "글로벌ETF마을",
+        "반도체마을",
+        "국장마을",
+        "신흥국 마을"
+      ]
+    },
+    "moderateAggressive": {
+      "name": "적극투자형",
+      "icon": "🚀",
+      "description": "높은 수익을 추구하며 상당한 위험을 감수할 수 있습니다. 시장 변동성을 투자 기회로 활용합니다.",
+      "characteristics": [
+        "높은 수익률 목표",
+        "상당한 위험 감수 가능",
+        "성장 가능성이 높은 자산 선호",
+        "시장 타이밍 활용"
+      ],
+      "portfolios": [
+        "미장마을",
+        "반도체마을",
+        "레버리지마을",
+        "신흥국 마을"
+      ]
+    },
+    "aggressive": {
+      "name": "공격투자형",
+      "icon": "⚡",
+      "description": "최고 수익을 위해 높은 위험을 기꺼이 감수하며, 공격적인 투자 전략을 추구합니다.",
+      "characteristics": [
+        "최대 수익률 추구",
+        "높은 위험 적극 감수",
+        "레버리지 및 고위험 상품 활용",
+        "단기 시장 변동 적극 활용"
+      ],
+      "portfolios": [
+        "레버리지마을",
+        "미장마을",
+        "반도체마을",
+        "원자재 마을"
+      ]
+    }
+  },
+  "investmentQuestions": [
+    {
+      "id": "q1",
+      "question": "투자의 주요 목적은 무엇인가요?",
+      "answers": [
+        {
+          "id": "q1_a1",
+          "text": "원금 보존이 최우선입니다",
+          "weights": {
+            "conservative": 5,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q1_a2",
+          "text": "안정적인 소득 창출입니다",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 4,
+            "moderate": 1
+          }
+        },
+        {
+          "id": "q1_a3",
+          "text": "자산의 꾸준한 성장입니다",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4,
+            "moderateAggressive": 2
+          }
+        },
+        {
+          "id": "q1_a4",
+          "text": "공격적인 자산 증식입니다",
+          "weights": {
+            "moderate": 1,
+            "moderateAggressive": 4,
+            "aggressive": 3
+          }
+        },
+        {
+          "id": "q1_a5",
+          "text": "단기 고수익 실현입니다",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "투자 예상 기간은 얼마나 되나요?",
+      "answers": [
+        {
+          "id": "q2_a1",
+          "text": "1년 미만",
+          "weights": {
+            "aggressive": 4,
+            "moderateAggressive": 2
+          }
+        },
+        {
+          "id": "q2_a2",
+          "text": "1~3년",
+          "weights": {
+            "moderateAggressive": 3,
+            "moderate": 3
+          }
+        },
+        {
+          "id": "q2_a3",
+          "text": "3~5년",
+          "weights": {
+            "moderate": 4,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q2_a4",
+          "text": "5~10년",
+          "weights": {
+            "moderateConservative": 4,
+            "conservative": 2
+          }
+        },
+        {
+          "id": "q2_a5",
+          "text": "10년 이상",
+          "weights": {
+            "conservative": 5,
+            "moderateConservative": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "투자 원금이 10% 손실되면 어떻게 하시겠습니까?",
+      "answers": [
+        {
+          "id": "q3_a1",
+          "text": "즉시 전액 손절합니다",
+          "weights": {
+            "conservative": 5,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q3_a2",
+          "text": "일부만 손절하고 관망합니다",
+          "weights": {
+            "moderateConservative": 4,
+            "moderate": 2
+          }
+        },
+        {
+          "id": "q3_a3",
+          "text": "그대로 보유하며 회복을 기다립니다",
+          "weights": {
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q3_a4",
+          "text": "추가 매수를 고려합니다",
+          "weights": {
+            "moderateAggressive": 4,
+            "aggressive": 2
+          }
+        },
+        {
+          "id": "q3_a5",
+          "text": "대폭 추가 매수합니다",
+          "weights": {
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "1년 후 기대하는 수익률은?",
+      "answers": [
+        {
+          "id": "q4_a1",
+          "text": "원금만 보존되면 만족",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q4_a2",
+          "text": "3% 미만",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 3
+          }
+        },
+        {
+          "id": "q4_a3",
+          "text": "3~7%",
+          "weights": {
+            "moderateConservative": 4,
+            "moderate": 3
+          }
+        },
+        {
+          "id": "q4_a4",
+          "text": "7~15%",
+          "weights": {
+            "moderate": 3,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q4_a5",
+          "text": "15% 이상",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "투자 경험은 얼마나 되시나요?",
+      "answers": [
+        {
+          "id": "q5_a1",
+          "text": "전혀 없음",
+          "weights": {
+            "conservative": 4,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q5_a2",
+          "text": "1년 미만",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q5_a3",
+          "text": "1~3년",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q5_a4",
+          "text": "3~5년",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q5_a5",
+          "text": "5년 이상",
+          "weights": {
+            "moderateAggressive": 3,
+            "aggressive": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q6",
+      "question": "투자 자금이 전체 자산에서 차지하는 비중은?",
+      "answers": [
+        {
+          "id": "q6_a1",
+          "text": "10% 미만",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q6_a2",
+          "text": "10~30%",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q6_a3",
+          "text": "30~50%",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q6_a4",
+          "text": "50~70%",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q6_a5",
+          "text": "70% 이상",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "question": "투자 상품 선택 시 가장 중요한 기준은?",
+      "answers": [
+        {
+          "id": "q7_a1",
+          "text": "안정성과 원금 보장",
+          "weights": {
+            "conservative": 5,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q7_a2",
+          "text": "낮은 변동성",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q7_a3",
+          "text": "적절한 수익과 위험 균형",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q7_a4",
+          "text": "높은 수익 잠재력",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4,
+            "aggressive": 2
+          }
+        },
+        {
+          "id": "q7_a5",
+          "text": "최대 수익률",
+          "weights": {
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "question": "시장이 급락할 때의 대응 방식은?",
+      "answers": [
+        {
+          "id": "q8_a1",
+          "text": "공포를 느끼고 전량 매도",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q8_a2",
+          "text": "불안하지만 일부만 매도",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q8_a3",
+          "text": "차분하게 상황 관망",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q8_a4",
+          "text": "기회로 보고 매수 검토",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 5
+          }
+        },
+        {
+          "id": "q8_a5",
+          "text": "큰 기회로 보고 적극 매수",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "question": "레버리지(차입) 투자에 대한 생각은?",
+      "answers": [
+        {
+          "id": "q9_a1",
+          "text": "절대 하지 않음",
+          "weights": {
+            "conservative": 5,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q9_a2",
+          "text": "위험해서 피하고 싶음",
+          "weights": {
+            "moderateConservative": 4,
+            "moderate": 2
+          }
+        },
+        {
+          "id": "q9_a3",
+          "text": "상황에 따라 소량 고려 가능",
+          "weights": {
+            "moderate": 4,
+            "moderateAggressive": 2
+          }
+        },
+        {
+          "id": "q9_a4",
+          "text": "수익 극대화를 위해 활용",
+          "weights": {
+            "moderateAggressive": 4,
+            "aggressive": 3
+          }
+        },
+        {
+          "id": "q9_a5",
+          "text": "적극적으로 활용",
+          "weights": {
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question": "포트폴리오 변동성을 어느 정도 받아들일 수 있나요?",
+      "answers": [
+        {
+          "id": "q10_a1",
+          "text": "연 5% 미만",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q10_a2",
+          "text": "연 5~10%",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q10_a3",
+          "text": "연 10~20%",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q10_a4",
+          "text": "연 20~30%",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q10_a5",
+          "text": "30% 이상도 괜찮음",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "question": "투자 정보는 주로 어디서 얻나요?",
+      "answers": [
+        {
+          "id": "q11_a1",
+          "text": "전문가 추천만 따름",
+          "weights": {
+            "conservative": 4,
+            "moderateConservative": 3
+          }
+        },
+        {
+          "id": "q11_a2",
+          "text": "뉴스와 리포트",
+          "weights": {
+            "moderateConservative": 4,
+            "moderate": 2
+          }
+        },
+        {
+          "id": "q11_a3",
+          "text": "다양한 채널 종합",
+          "weights": {
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q11_a4",
+          "text": "직접 분석과 연구",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q11_a5",
+          "text": "본인만의 독자적 분석",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "question": "투자 결정은 얼마나 신속하게 하시나요?",
+      "answers": [
+        {
+          "id": "q12_a1",
+          "text": "며칠~몇 주 고민",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q12_a2",
+          "text": "하루 이틀 숙고",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q12_a3",
+          "text": "당일 분석 후 결정",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q12_a4",
+          "text": "몇 시간 내 결정",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q12_a5",
+          "text": "즉시 결정",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "question": "배당수익과 시세차익 중 어느 것을 선호하시나요?",
+      "answers": [
+        {
+          "id": "q13_a1",
+          "text": "배당수익만 중요",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q13_a2",
+          "text": "배당수익 위주",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q13_a3",
+          "text": "둘 다 비슷하게",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q13_a4",
+          "text": "시세차익 위주",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q13_a5",
+          "text": "시세차익만 중요",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "question": "새로운 투자 상품이나 시장에 대한 태도는?",
+      "answers": [
+        {
+          "id": "q14_a1",
+          "text": "절대 투자하지 않음",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q14_a2",
+          "text": "충분히 검증된 후에만",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q14_a3",
+          "text": "신중하게 일부 투자",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q14_a4",
+          "text": "적극적으로 탐색",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q14_a5",
+          "text": "선도적으로 투자",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "question": "투자 손실이 발생했을 때 심리 상태는?",
+      "answers": [
+        {
+          "id": "q15_a1",
+          "text": "극심한 스트레스와 불안",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q15_a2",
+          "text": "상당한 걱정과 불편함",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q15_a3",
+          "text": "약간 불편하지만 감내 가능",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q15_a4",
+          "text": "크게 동요하지 않음",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q15_a5",
+          "text": "전혀 개의치 않음",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "question": "포트폴리오 리밸런싱 주기는?",
+      "answers": [
+        {
+          "id": "q16_a1",
+          "text": "거의 하지 않음",
+          "weights": {
+            "conservative": 4,
+            "moderateConservative": 2
+          }
+        },
+        {
+          "id": "q16_a2",
+          "text": "연 1회",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q16_a3",
+          "text": "분기별",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q16_a4",
+          "text": "월별",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q16_a5",
+          "text": "수시로",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "question": "투자 자산 중 해외 자산 비중은?",
+      "answers": [
+        {
+          "id": "q17_a1",
+          "text": "0% (국내만)",
+          "weights": {
+            "conservative": 4
+          }
+        },
+        {
+          "id": "q17_a2",
+          "text": "1~20%",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 3
+          }
+        },
+        {
+          "id": "q17_a3",
+          "text": "20~40%",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q17_a4",
+          "text": "40~60%",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q17_a5",
+          "text": "60% 이상",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "question": "투자 시 참고하는 기간은?",
+      "answers": [
+        {
+          "id": "q18_a1",
+          "text": "10년 이상 장기",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q18_a2",
+          "text": "5~10년",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q18_a3",
+          "text": "1~5년",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q18_a4",
+          "text": "수개월~1년",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q18_a5",
+          "text": "일~주 단위",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "question": "손절매 기준은 어떻게 설정하시나요?",
+      "answers": [
+        {
+          "id": "q19_a1",
+          "text": "-3% 이내",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q19_a2",
+          "text": "-5% 이내",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q19_a3",
+          "text": "-10% 이내",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q19_a4",
+          "text": "-20% 이내",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q19_a5",
+          "text": "설정하지 않음",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "question": "파생상품(옵션, 선물 등) 투자 경험은?",
+      "answers": [
+        {
+          "id": "q20_a1",
+          "text": "전혀 없고 관심 없음",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q20_a2",
+          "text": "없지만 알아보는 중",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q20_a3",
+          "text": "소액으로 경험해봄",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q20_a4",
+          "text": "정기적으로 투자",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q20_a5",
+          "text": "주력 투자 수단",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "question": "투자 실패 경험에 대한 태도는?",
+      "answers": [
+        {
+          "id": "q21_a1",
+          "text": "다시는 투자하지 않을 것",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q21_a2",
+          "text": "매우 신중해짐",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q21_a3",
+          "text": "교훈으로 삼고 개선",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q21_a4",
+          "text": "당연한 과정으로 수용",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q21_a5",
+          "text": "학습 기회로 적극 활용",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "question": "시장 전망이 불확실할 때의 대응은?",
+      "answers": [
+        {
+          "id": "q22_a1",
+          "text": "전액 현금 보유",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q22_a2",
+          "text": "대부분 현금화",
+          "weights": {
+            "conservative": 3,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q22_a3",
+          "text": "기존 포지션 유지",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q22_a4",
+          "text": "저점 매수 기회 모색",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q22_a5",
+          "text": "변동성을 적극 활용",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "question": "투자 관련 학습에 투자하는 시간은?",
+      "answers": [
+        {
+          "id": "q23_a1",
+          "text": "거의 없음",
+          "weights": {
+            "conservative": 4
+          }
+        },
+        {
+          "id": "q23_a2",
+          "text": "주 1시간 미만",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 3
+          }
+        },
+        {
+          "id": "q23_a3",
+          "text": "주 1~3시간",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 4
+          }
+        },
+        {
+          "id": "q23_a4",
+          "text": "주 3~7시간",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q23_a5",
+          "text": "주 7시간 이상",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "question": "나의 투자 스타일은?",
+      "answers": [
+        {
+          "id": "q24_a1",
+          "text": "매우 보수적",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q24_a2",
+          "text": "다소 보수적",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 5
+          }
+        },
+        {
+          "id": "q24_a3",
+          "text": "중립적",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q24_a4",
+          "text": "다소 공격적",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 5
+          }
+        },
+        {
+          "id": "q24_a5",
+          "text": "매우 공격적",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "question": "투자 수익에 대한 만족도 기준은?",
+      "answers": [
+        {
+          "id": "q25_a1",
+          "text": "손실만 없으면 만족",
+          "weights": {
+            "conservative": 5
+          }
+        },
+        {
+          "id": "q25_a2",
+          "text": "예금 이자보다 조금 높으면 만족",
+          "weights": {
+            "conservative": 2,
+            "moderateConservative": 4
+          }
+        },
+        {
+          "id": "q25_a3",
+          "text": "시장 평균 수익률이면 만족",
+          "weights": {
+            "moderateConservative": 2,
+            "moderate": 5
+          }
+        },
+        {
+          "id": "q25_a4",
+          "text": "시장 평균을 상회해야 만족",
+          "weights": {
+            "moderate": 2,
+            "moderateAggressive": 4
+          }
+        },
+        {
+          "id": "q25_a5",
+          "text": "최상위 수익률을 목표",
+          "weights": {
+            "moderateAggressive": 2,
+            "aggressive": 5
+          }
+        }
+      ]
+    }
+  ],
+  "testState": {
+    "currentQuestionIndex": 0,
+    "userAnswers": [],
+    "progress": {
+      "current": 1,
+      "total": 25
+    }
+  },
+  "testResult": {
+    "scores": {
+      "conservative": 10,
+      "moderateConservative": 10,
+      "moderate": 10,
+      "moderateAggressive": 10,
+      "aggressive": 10
+    },
+    "percentages": {
+      "conservative": 20,
+      "moderateConservative": 20,
+      "moderate": 20,
+      "moderateAggressive": 20,
+      "aggressive": 20
+    },
+    "mainType": "moderate"
+  },
+  "resultChart": {
+    "type": "doughnut",
+    "data": {
+      "labels": [
+        "안정형",
+        "안정추구형",
+        "위험중립형",
+        "적극투자형",
+        "공격투자형"
+      ],
+      "datasets": [
+        {
+          "data": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "backgroundColor": [
+            "rgba(78, 205, 196, 0.8)",
+            "rgba(129, 207, 224, 0.8)",
+            "rgba(255, 210, 63, 0.8)",
+            "rgba(247, 147, 30, 0.8)",
+            "rgba(255, 107, 53, 0.8)"
+          ],
+          "borderWidth": 3,
+          "borderColor": "#fff"
+        }
+      ]
+    },
+    "options": {
+      "responsive": true,
+      "maintainAspectRatio": true,
+      "plugins": {
+        "legend": {
+          "position": "bottom"
+        },
+        "tooltip": {}
+      },
+      "cutout": "60%"
+    }
+  }
+}

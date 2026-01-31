@@ -1,0 +1,54 @@
+{
+  "village": {
+    "id": "village-us",
+    "name": "미장마을",
+    "icon": "🇺🇸",
+    "assets": [
+      {
+        "id": "AAPL",
+        "name": "AAPL",
+        "type": "기술주",
+        "ticker": "AAPL"
+      },
+      {
+        "id": "TSLA",
+        "name": "TSLA",
+        "type": "성장주",
+        "ticker": "TSLA"
+      },
+      {
+        "id": "NVDA",
+        "name": "NVDA",
+        "type": "AI주",
+        "ticker": "NVDA"
+      },
+      {
+        "id": "MSFT",
+        "name": "MSFT",
+        "type": "기술주",
+        "ticker": "MSFT"
+      }
+    ],
+    "totalValue": 15000000,
+    "returnRate": 12.5,
+    "allocation": 32.3,
+    "type": "growth",
+    "goal": "long-term"
+  },
+  "typeTextMap": {
+    "growth": "성장형",
+    "dividend": "배당형",
+    "leverage": "레버리지형",
+    "domestic": "국내주식",
+    "etf": "글로벌 ETF",
+    "semiconductor": "반도체 섹터"
+  },
+  "goalTextMap": {
+    "long-term": "장기 투자",
+    "passive-income": "배당 수익",
+    "high-risk": "고위험/고수익",
+    "balanced": "균형 투자",
+    "diversification": "분산 투자",
+    "sector-focus": "섹터 집중"
+  }
+}

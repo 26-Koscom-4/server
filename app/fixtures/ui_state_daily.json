@@ -1,0 +1,95 @@
+{
+  "selectedVillage": {
+    "id": "village-dividend",
+    "name": "배당마을",
+    "icon": "💰",
+    "type": "dividend",
+    "goal": "passive-income",
+    "totalValue": 8000000,
+    "returnRate": 8.3,
+    "allocation": 17.2,
+    "assets": [
+      {
+        "id": "O",
+        "name": "O",
+        "type": "배당ETF",
+        "value": 3000000,
+        "ticker": "O"
+      },
+      {
+        "id": "SCHD",
+        "name": "SCHD",
+        "type": "배당ETF",
+        "value": 3000000,
+        "ticker": "SCHD"
+      },
+      {
+        "id": "VYM",
+        "name": "VYM",
+        "type": "배당ETF",
+        "value": 2000000,
+        "ticker": "VYM"
+      }
+    ],
+    "lastBriefingRead": "2026-02-01"
+  },
+  "briefingSections": [
+    {
+      "title": "배당마을 요약",
+      "items": [
+        {
+          "label": "총 자산",
+          "value": "8,000,000원"
+        },
+        {
+          "label": "수익률",
+          "value": "+8.3%"
+        },
+        {
+          "label": "포트폴리오 비중",
+          "value": "17.2%"
+        }
+      ]
+    },
+    {
+      "title": "보유 자산",
+      "items": [
+        {
+          "label": "O",
+          "value": "배당ETF - 3,000,000원"
+        },
+        {
+          "label": "SCHD",
+          "value": "배당ETF - 3,000,000원"
+        },
+        {
+          "label": "VYM",
+          "value": "배당ETF - 2,000,000원"
+        }
+      ]
+    },
+    {
+      "title": "투자 정보",
+      "items": [
+        {
+          "label": "투자 유형",
+          "value": "배당형"
+        },
+        {
+          "label": "투자 목표",
+          "value": "배당 수익"
+        }
+      ]
+    },
+    {
+      "title": "오늘의 조언",
+      "items": [
+        {
+          "label": "요약",
+          "value": "배당주는 안정적인 현금 흐름을 제공하며 배당락일 체크가 필요합니다."
+        }
+      ]
+    }
+  ],
+  "fallbackStaticContentHtml": "<div class=\"briefing-section\"><h3>미장마을 데일리 브리핑 (오전 8시)</h3><p>미장마을이 오늘도 힘차게 움직이고 있습니다.</p><p>지수는 +0.5% 상승 중이며 긍정적인 흐름이 예상됩니다.</p></div><div class=\"briefing-section\"><h3>레버리지마을 위험 경고</h3><p>변동성 지수(VIX)가 18.5로 상승했습니다.</p><p>레버리지 비중 조정이 필요할 수 있습니다.</p></div><div class=\"briefing-section\"><h3>배당마을 D-Day 알림</h3><p>SCHD 배당락일까지 <strong>3일</strong> 남았습니다.</p><p>예상 배당 수익: $127.50</p></div>"
+}

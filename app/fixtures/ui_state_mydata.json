@@ -1,0 +1,42 @@
+﻿{
+  "mockInstitutions": [
+    { "id": "kb", "name": "KB증권", "icon": "🏦", "description": "보유 주식 3종목" },
+    { "id": "samsung", "name": "삼성증권", "icon": "💼", "description": "보유 주식 5종목" },
+    { "id": "mirae", "name": "미래에셋증권", "icon": "🏢", "description": "보유 ETF 2종목" },
+    { "id": "nh", "name": "NH투자증권", "icon": "🏛️", "description": "보유 주식 4종목" },
+    { "id": "kiwoom", "name": "키움증권", "icon": "💻", "description": "보유 주식 2종목" },
+    { "id": "shinhan", "name": "신한은행", "icon": "🏦", "description": "예금 계좌 1개" },
+    { "id": "kakao", "name": "카카오뱅크", "icon": "💛", "description": "예금 계좌 1개" }
+  ],
+  "consent": {
+    "consent1": false,
+    "consent2": false,
+    "consent3": false,
+    "consentAll": false
+  },
+  "selectedInstitutions": ["kb", "mirae"],
+  "loadingMessages": [
+    "금융기관 연결 중...",
+    "보안 인증 진행 중...",
+    "자산 정보 수집 중...",
+    "데이터 동기화 중...",
+    "거의 완료되었습니다..."
+  ],
+  "loading": {
+    "progress": 40,
+    "message": "보안 인증 진행 중..."
+  },
+  "completionSummary": [
+    { "id": "kb", "name": "KB증권", "icon": "🏦", "status": "연동 완료" },
+    { "id": "mirae", "name": "미래에셋증권", "icon": "🏢", "status": "연동 완료" }
+  ],
+  "mydata_integration": {
+    "is_integrated": true,
+    "last_integration_date": "2026-02-01T08:00:00.000Z",
+    "integrated_institutions": [
+      { "id": "kb", "name": "KB증권", "icon": "🏦" },
+      { "id": "mirae", "name": "미래에셋증권", "icon": "🏢" }
+    ],
+    "integration_count": 1
+  }
+}

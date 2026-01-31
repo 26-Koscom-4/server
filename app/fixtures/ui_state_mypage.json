@@ -1,0 +1,39 @@
+﻿{
+  "user_profile": {
+    "name": "김직장",
+    "theme": "light"
+  },
+  "settings": {
+    "briefing_time": "08:00",
+    "voice_speed": 1.0
+  },
+  "statistics": {
+    "totalAssets": 46500000,
+    "villageCount": 6,
+    "avgReturn": 7.8,
+    "assetCount": 19
+  },
+  "activity": {
+    "items": [
+      { "id": "welcome", "title": "K-AMIs에 오신 것을 환영합니다", "time": "방금 전" }
+    ]
+  },
+  "mydata_integration": {
+    "is_integrated": false,
+    "last_integration_date": null,
+    "integrated_institutions": [],
+    "integration_count": 0
+  },
+  "investment_test": {
+    "completed": true,
+    "date": "2026-02-01T08:00:00.000Z",
+    "mainType": "moderate",
+    "percentages": {
+      "conservative": "18.0",
+      "moderateConservative": "22.0",
+      "moderate": "30.0",
+      "moderateAggressive": "20.0",
+      "aggressive": "10.0"
+    }
+  }
+}
