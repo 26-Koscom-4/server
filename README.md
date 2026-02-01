@@ -7,6 +7,8 @@
 
 ### 로컬 실행 (uvicorn)
 
+Python 버전: 3.13.5
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
