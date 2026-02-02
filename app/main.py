@@ -19,13 +19,16 @@ _scheduler: Optional[BackgroundScheduler] = None
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """앱 시작 시 DB 연결 확인 및 APScheduler 등록(매일 9시·17시), 종료 시 리소스 정리."""
-    # Database connection check
-    try:
-        with engine.connect() as connection:
-            print("✓ Database connection successful")
-    except Exception as e:
-        print(f"✗ Database connection failed: {e}")
-        raise
+    # Database connection check (optional)
+    if settings.DB_ENABLED:
+        try:
+            with engine.connect() as connection:
+                print("DB connection successful")
+        except Exception as e:
+            print(f"DB connection failed: {e}")
+            raise
+    else:
+        print("DB disabled; skipping connection check")
 
     # Start APScheduler
     global _scheduler
