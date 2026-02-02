@@ -2,21 +2,21 @@ from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, status
 
-from app.schemas.auth.request import LoginRequest
-from app.schemas.auth.response import LoginResponse
-from app.schemas.briefing.response import BriefingResponse
-from app.schemas.common.error import ErrorResponse
-from app.schemas.common.response import OkResponse
-from app.schemas.daily.response import DailyResponse
-from app.schemas.investment_test.request import InvestmentTestResultRequest
-from app.schemas.investment_test.response import InvestmentTestResponse
-from app.schemas.main.response import MainResponse
-from app.schemas.mydata.request import MydataCompleteRequest
-from app.schemas.mydata.response import MydataResponse
-from app.schemas.mypage.response import MypageResponse
-from app.schemas.neighbors.response import NeighborsResponse
-from app.schemas.villages.request import CreateVillageRequest
-from app.schemas.villages.response import (
+from app.domain.user.schema.auth.request import LoginRequest
+from app.domain.user.schema.auth.response import LoginResponse
+from app.domain.briefing.schema.response import BriefingResponse
+from app.domain.common.schema.error import ErrorResponse
+from app.domain.common.schema.response import OkResponse
+from app.domain.user.schema.daily.response import DailyResponse
+from app.domain.user.schema.investment_test.request import InvestmentTestResultRequest
+from app.domain.user.schema.investment_test.response import InvestmentTestResponse
+from app.domain.user.schema.main.response import MainResponse
+from app.domain.user.schema.mydata.request import MydataCompleteRequest
+from app.domain.user.schema.mydata.response import MydataResponse
+from app.domain.user.schema.mypage.response import MypageResponse
+from app.domain.user.schema.neighbors.response import NeighborsResponse
+from app.domain.village.schema.request import CreateVillageRequest
+from app.domain.village.schema.response import (
     CreateVillageResponse,
     VillageModalResponse,
     VillagesResponse,

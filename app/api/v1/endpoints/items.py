@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter
-from app.schemas.item import ItemCreate, ItemRead
+from app.domain.common.schema.item import ItemCreate, ItemRead
 
 router = APIRouter()
 

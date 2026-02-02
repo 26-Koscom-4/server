@@ -3,8 +3,8 @@
 from fastapi import APIRouter, HTTPException
 
 from app.core.briefing_store import get_latest
-from app.schemas.briefing.request import BriefingGenerateRequest
-from app.schemas.briefing.response import BriefingGenerateResponse, LatestBriefingResponse
+from app.domain.briefing.schema.request import BriefingGenerateRequest
+from app.domain.briefing.schema.response import BriefingGenerateResponse, LatestBriefingResponse
 from app.services.briefing import generate_briefing
 
 router = APIRouter()

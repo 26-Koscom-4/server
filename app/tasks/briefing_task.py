@@ -10,9 +10,9 @@ import asyncio
 import logging
 from typing import Any, Dict, Optional
 
-from app.schemas.briefing.request import BriefingGenerateRequest
-from app.schemas.briefing.response import BriefingGenerateResponse
-from app.schemas.villages.models import Village, VillageAsset
+from app.domain.briefing.schema.request import BriefingGenerateRequest
+from app.domain.briefing.schema.response import BriefingGenerateResponse
+from app.domain.village.schema.dto import Village, VillageAsset
 from app.services.briefing import generate_briefing
 from app.utils.fixtures import FixtureInvalid, FixtureNotFound, load_fixture
 

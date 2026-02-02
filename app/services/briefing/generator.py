@@ -3,7 +3,7 @@
 import logging
 from typing import Any, Dict, List, Optional
 
-from app.schemas.briefing.models import (
+from app.domain.briefing.schema.dto import (
     AssetAnalysisItem,
     BriefingCard,
     BriefingCardHeader,
@@ -11,8 +11,8 @@ from app.schemas.briefing.models import (
     StrategySection,
     VillageBriefing,
 )
-from app.schemas.briefing.request import BriefingGenerateRequest, NewsItem
-from app.schemas.briefing.response import BriefingGenerateResponse
+from app.domain.briefing.schema.request import BriefingGenerateRequest, NewsItem
+from app.domain.briefing.schema.response import BriefingGenerateResponse
 from app.services.briefing.llm import call_llm
 from app.services.briefing.parser import parse_briefing_response
 from app.services.briefing.prompt import (
