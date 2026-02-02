@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.core.database import engine
-from app.models import Base
+from app.domain.common.model import Base
 from app.services.briefing.scheduled_briefing import run_scheduled_briefing
 from app.utils.fixtures import FixtureInvalid, FixtureNotFound
 

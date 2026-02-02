@@ -1,9 +1,9 @@
-from app.models.asset import Asset, AssetPrice
-from app.models.base import Base
-from app.models.portfolio import UserPortfolio
-from app.models.prompt import Prompt, VillagePrompt
-from app.models.user import User
-from app.models.village import Village, VillageAsset
+from app.domain.asset.model import Asset, AssetPrice
+from app.domain.common.model import Base
+from app.domain.portfolio.model import UserPortfolio
+from app.domain.prompt.model import Prompt, VillagePrompt
+from app.domain.user.model import User
+from app.domain.village.model import Village, VillageAsset
 
 __all__ = [
     "Base",
