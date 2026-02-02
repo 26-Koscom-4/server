@@ -1,16 +1,26 @@
 from datetime import datetime
-from sqlalchemy import DateTime, func
+
+from sqlalchemy import TIMESTAMP, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
-    """Base class for all database models"""
     pass
 
 
-class TimestampMixin:
-    """Mixin for created_at and updated_at timestamps"""
-    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=func.now())
+class CreatedUpdatedMixin:
+    created_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
+    )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=False, default=func.now(), onupdate=func.now()
+        TIMESTAMP,
+        nullable=False,
+        server_default=func.current_timestamp(),
+        server_onupdate=func.current_timestamp(),
+    )
+
+
+class CreatedAtMixin:
+    created_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )

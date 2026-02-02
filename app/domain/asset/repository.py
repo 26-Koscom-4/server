@@ -1,0 +1,2 @@
+class AssetRepository:
+    pass

@@ -1,27 +1,36 @@
 from datetime import datetime
-from sqlalchemy import CHAR, VARCHAR, DATETIME, Index
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from decimal import Decimal
 
-from app.models.base import Base
+from sqlalchemy import BigInteger, Enum, Index, String, TIMESTAMP, DECIMAL, func
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.models.base import Base, CreatedUpdatedMixin
 
 
-class Asset(Base):
+class Asset(Base, CreatedUpdatedMixin):
     __tablename__ = "assets"
-    __table_args__ = (Index("idx_assets_ticker", "ticker"),)
-
-    id: Mapped[str] = mapped_column(CHAR(36), primary_key=True)
-    name: Mapped[str] = mapped_column(VARCHAR(80), nullable=False)
-    ticker: Mapped[str] = mapped_column(VARCHAR(20), nullable=False)
-    market: Mapped[str] = mapped_column(VARCHAR(20), nullable=False)
-    asset_type: Mapped[str] = mapped_column(VARCHAR(20), nullable=False)
-    currency: Mapped[str] = mapped_column(VARCHAR(10), nullable=False, default="KRW")
-    created_at: Mapped[datetime] = mapped_column(DATETIME, nullable=False, default=datetime.utcnow)
-
-    # Relationships
-    village_assets: Mapped[list["VillageAsset"]] = relationship("VillageAsset", back_populates="asset")
-    news_items: Mapped[list["NewsItem"]] = relationship(
-        "NewsItem", secondary="news_item_assets", back_populates="assets"
+    __table_args__ = (
+        Index("uk_assets_symbol", "symbol", unique=True),
+        Index("idx_assets_country", "country_code"),
+        Index("idx_assets_type", "asset_type"),
     )
-    neighbor_items: Mapped[list["NeighborRecommendationItem"]] = relationship(
-        "NeighborRecommendationItem", secondary="neighbor_item_assets", back_populates="assets"
+
+    asset_id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
+    symbol: Mapped[str] = mapped_column(String(32), nullable=False)
+    name: Mapped[str] = mapped_column(String(128), nullable=False)
+    country_code: Mapped[str] = mapped_column(String(2), nullable=False)
+    asset_type: Mapped[str] = mapped_column(
+        Enum("STOCK", "ETF", name="asset_type"),
+        nullable=False,
+    )
+
+
+class AssetPrice(Base):
+    __tablename__ = "asset_price"
+    __table_args__ = (Index("idx_asset_price_asof", "as_of"),)
+
+    asset_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    price: Mapped[Decimal] = mapped_column(DECIMAL(24, 8), nullable=False)
+    as_of: Mapped[datetime] = mapped_column(
+        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )

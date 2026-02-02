@@ -1,0 +1,2 @@
+class VillageRepository:
+    pass
