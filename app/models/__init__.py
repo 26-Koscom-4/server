@@ -1,32 +1,18 @@
-from app.models.base import Base
-from app.models.user import User, UserSettings
-from app.models.village import Village, VillageMetricsDaily, VillageAsset
-from app.models.asset import Asset
-from app.models.briefing import Briefing, BriefingNewsLink, TimeSlot, TargetScope
-from app.models.news import NewsItem, NewsItemAsset
-from app.models.neighbor import (
-    NeighborRecommendation,
-    NeighborRecommendationItem,
-    NeighborItemAsset,
-)
-from app.models.risk import RiskProfile
+from app.domain.asset.model import Asset, AssetPrice
+from app.domain.common.model import Base
+from app.domain.portfolio.model import UserPortfolio
+from app.domain.prompt.model import Prompt, VillagePrompt
+from app.domain.user.model import User
+from app.domain.village.model import Village, VillageAsset
 
 __all__ = [
     "Base",
     "User",
-    "UserSettings",
-    "Village",
-    "VillageMetricsDaily",
-    "VillageAsset",
     "Asset",
-    "Briefing",
-    "BriefingNewsLink",
-    "TimeSlot",
-    "TargetScope",
-    "NewsItem",
-    "NewsItemAsset",
-    "NeighborRecommendation",
-    "NeighborRecommendationItem",
-    "NeighborItemAsset",
-    "RiskProfile",
+    "AssetPrice",
+    "UserPortfolio",
+    "Village",
+    "VillageAsset",
+    "Prompt",
+    "VillagePrompt",
 ]

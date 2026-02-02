@@ -54,5 +54,6 @@ def init_db() -> None:
     Initialize database tables.
     This will create all tables defined in the models.
     """
-    from app.models import Base
+    from app.domain.common.model import Base
+    import app.models  # ensure models are registered
     Base.metadata.create_all(bind=engine)

@@ -1,0 +1,2 @@
+class BriefingService:
+    pass
