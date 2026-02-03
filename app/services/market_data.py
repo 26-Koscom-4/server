@@ -1,12 +1,35 @@
-"""실시간 시세·뉴스 수집 (yfinance). API 실패 시 빈/목 데이터 반환."""
+"""실시간 시세·뉴스 수집 (yfinance 시세 + RSS 뉴스). API 실패 시 빈/목 데이터 반환."""
 
 import asyncio
 import logging
+import time
+import urllib.parse
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
+# RSS 피드 URL 설정 (Google News)
+RSS_FEEDS = {
+    "google_news_kr": "https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko",
+}
+
+# 주요 종목의 한글명 매핑 (Google News 검색용)
+TICKER_KR_NAME = {
+    "005930": "삼성전자",
+    "000660": "SK하이닉스",
+    "035420": "NAVER",
+    "035720": "카카오",
+    "207940": "삼성바이오로직스",
+    "005380": "현대차",
+    "AAPL": "애플",
+    "NVDA": "엔비디아",
+    "TSLA": "테슬라",
+    "MSFT": "마이크로소프트",
+    "GOOGL": "구글",
+    "META": "메타",
+    "AMZN": "아마존",
+}
 
 @dataclass
 class TickerQuote:
@@ -57,28 +80,60 @@ def _fetch_ticker_quote(ticker: str) -> TickerQuote:
         return TickerQuote(ticker=ticker)
 
 
-def _fetch_ticker_news(ticker: str, limit: int = 3) -> List[Dict[str, Any]]:
-    """동기: yfinance로 한 종목 뉴스 최대 limit건. NewsItem 호환 필드."""
+def _fetch_rss_feed(url: str, limit: int = 10) -> List[Dict[str, Any]]:
+    """RSS 피드에서 뉴스 가져오기."""
     try:
-        import yfinance as yf
+        import feedparser
 
-        t = yf.Ticker(ticker)
-        raw = t.news or []
-        out = []
-        for n in raw[:limit]:
-            out.append({
-                "title": (n.get("title") or "").strip(),
-                "summary": (n.get("summary") or n.get("title") or "").strip()[:500],
-                "source": (n.get("publisher") or n.get("source") or "").strip(),
-                "tickers": [ticker],
+        feed = feedparser.parse(url)
+        items = []
+        for entry in feed.entries[:limit]:
+            title = (entry.get("title") or "").strip()
+            summary = (entry.get("summary") or entry.get("description") or "").strip()
+            if summary:
+                import re
+
+                summary = re.sub(r"<[^>]+>", "", summary)[:500]
+            published_ts = None
+            if entry.get("published_parsed"):
+                published_ts = int(time.mktime(entry.published_parsed))
+            items.append({
+                "title": title,
+                "summary": summary or title,
+                "source": entry.get("source", {}).get("title", "") or feed.feed.get("title", ""),
+                "link": entry.get("link", ""),
+                "published": published_ts,
             })
-        return out
+        logger.warning("RSS fetched: url=%s count=%d", url, len(items))
+        return items
     except Exception as e:
-        logger.warning("yfinance news failed for %s: %s", ticker, e)
+        logger.warning("RSS feed fetch failed for %s: %s", url, e)
         return []
 
 
-def _get_market_context_sync(tickers: List[str], news_per_ticker: int = 3) -> MarketContext:
+def _fetch_ticker_news(ticker: str, query: Optional[str] = None, limit: int = 3) -> List[Dict[str, Any]]:
+    """동기: RSS 기반으로 종목 관련 뉴스 수집 (Google News)."""
+    try:
+        search_term = (query or "").strip() or TICKER_KR_NAME.get(ticker, ticker)
+        rss_url = RSS_FEEDS["google_news_kr"].format(query=urllib.parse.quote(search_term))
+        news_items = _fetch_rss_feed(rss_url, limit=limit)
+        out = []
+        for item in news_items:
+            item["tickers"] = [ticker]
+            out.append(item)
+        titles = [item.get("title") for item in out if item.get("title")]
+        logger.warning("[%s] RSS 뉴스 %d개 수집 (검색어: %s) titles=%s", ticker, len(out), search_term, titles)
+        return out
+    except Exception as e:
+        logger.warning("RSS news failed for %s: %s", ticker, e)
+        return []
+
+def _get_market_context_sync(
+    tickers: List[str],
+    news_per_ticker: int = 3,
+    name_map: Optional[Dict[str, str]] = None,
+    price_tickers: Optional[List[str]] = None,
+) -> MarketContext:
     """동기: 모든 ticker에 대해 시세·뉴스 수집. 실패한 ticker는 건너뜀."""
     tickers = [t for t in tickers if t]
     if not tickers:
@@ -87,13 +142,17 @@ def _get_market_context_sync(tickers: List[str], news_per_ticker: int = 3) -> Ma
     quotes: List[TickerQuote] = []
     news_by_key: Dict[str, Dict[str, Any]] = {}  # title -> item (중복 제거)
 
-    for ticker in tickers:
+    quote_tickers = price_tickers or tickers
+    for ticker in quote_tickers:
         q = _fetch_ticker_quote(ticker)
         quotes.append(q)
-        for item in _fetch_ticker_news(ticker, limit=news_per_ticker):
+    for ticker in tickers:
+        query = name_map.get(ticker) if name_map else None
+        for item in _fetch_ticker_news(ticker, query=query, limit=news_per_ticker):
             key = item.get("title") or ""
             if key and key not in news_by_key:
                 news_by_key[key] = item
+        logger.warning("RSS aggregate: ticker=%s query=%s news_count=%d", ticker, query, len(news_by_key))
 
     return MarketContext(
         ticker_quotes=quotes,
@@ -101,7 +160,12 @@ def _get_market_context_sync(tickers: List[str], news_per_ticker: int = 3) -> Ma
     )
 
 
-async def get_market_context(tickers: List[str], news_per_ticker: int = 3) -> MarketContext:
+async def get_market_context(
+    tickers: List[str],
+    news_per_ticker: int = 3,
+    name_map: Optional[Dict[str, str]] = None,
+    price_tickers: Optional[List[str]] = None,
+) -> MarketContext:
     """
     종목 코드 리스트에 대해 실시간 시세·최신 뉴스(종목당 최대 news_per_ticker건) 수집.
     비동기: yfinance 블로킹 호출을 스레드 풀에서 실행.
@@ -111,7 +175,7 @@ async def get_market_context(tickers: List[str], news_per_ticker: int = 3) -> Ma
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(
             None,
-            lambda: _get_market_context_sync(tickers, news_per_ticker),
+            lambda: _get_market_context_sync(tickers, news_per_ticker, name_map, price_tickers),
         )
     except Exception as e:
         logger.warning("get_market_context failed: %s", e)

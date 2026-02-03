@@ -22,6 +22,7 @@ class Village(Base, CreatedUpdatedMixin):
         nullable=False,
         server_default=text("'SYSTEM'"),
     )
+    village_profile: Mapped[Optional[str]] = mapped_column(String(512), nullable=True)
     ai_one_liner: Mapped[Optional[str]] = mapped_column(String(256), nullable=True)
     as_of: Mapped[Optional[datetime]] = mapped_column(TIMESTAMP, nullable=True)
 
