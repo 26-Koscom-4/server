@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy.dialects.mysql import insert as mysql_insert
 
 from app.domain.asset.model import Asset, AssetPrice
+from app.domain.briefing.model import BriefingSnapshot
 from app.domain.briefing.schema.dto import (
     AIAdvice,
     AssetDailyChangeItem,
@@ -337,8 +338,8 @@ async def generate_briefing(
 
     ai_advice = AIAdvice(title="오늘의 AI 조언", bullets=[str(b) for b in bullets])
 
-    return BriefingGenerateResponse(
-        user_id=req.user_id,
+    response = BriefingGenerateResponse(
+        user_id=user_id,
         time_slot=req.time_slot,
         village=village,
         portfolio_summary=portfolio_summary,
@@ -354,3 +355,12 @@ async def generate_briefing(
         latest_news=latest_news,
         ai_advice=ai_advice,
     )
+    snapshot = BriefingSnapshot(
+        user_id=user_id,
+        village_id=req.village_id,
+        time_slot=req.time_slot,
+        payload_json=response.model_dump(),
+    )
+    db.add(snapshot)
+    db.commit()
+    return response
