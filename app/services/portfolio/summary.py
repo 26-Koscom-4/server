@@ -24,7 +24,7 @@ from app.domain.portfolio.schema.response import (
 )
 from app.domain.portfolio.model import RebalancingSnapshot
 from app.services.briefing.llm import call_llm
-from app.services.market_data import MarketContext, TickerQuote, get_market_context
+from app.services.market_data import MarketContext, TickerQuote, get_market_context, get_usdkrw_rate
 
 logger = logging.getLogger(__name__)
 
@@ -97,6 +97,20 @@ def _classify_bucket(asset: Asset) -> List[str]:
     if "성장" in asset.name or "growth" in name:
         keys.append("growth")
     return keys or ["other"]
+
+
+def _bucket_label(key: str) -> str:
+    return {
+        "tech": "기술주",
+        "growth": "성장",
+        "us_stocks": "미국주식",
+        "kr_stocks": "한국주식",
+        "dividend_etf": "배당 ETF",
+        "leveraged_etf": "레버리지 ETF",
+        "growth_etf": "성장 ETF",
+        "etf": "ETF",
+        "other": "기타",
+    }.get(key, key)
 
 
 def _weighted_daily_change(items: List[Tuple[float, float]]) -> float:
@@ -233,13 +247,17 @@ async def build_portfolio_summary(
         news_per_ticker=0,
         price_tickers=price_tickers,
     )
+    usdkrw_rate = get_usdkrw_rate()
     quotes_map = _extract_quotes_map(market_ctx.ticker_quotes or [])
     price_updates: Dict[int, float] = {}
     for _p, asset in rows:
         quote_symbol = price_symbol_map.get(asset.asset_id, asset.symbol)
         quote = quotes_map.get(quote_symbol)
         if quote and quote.price is not None:
-            price_updates[asset.asset_id] = float(quote.price)
+            price = float(quote.price)
+            if asset.country_code == "US":
+                price *= usdkrw_rate
+            price_updates[asset.asset_id] = price
     _upsert_asset_prices(db, price_updates)
     price_map = _load_asset_prices(db, asset_ids)
 
@@ -314,14 +332,15 @@ async def build_portfolio_summary(
         village_allocations[v.village_id] = v_total
 
     asset_type_distribution = [
-        AssetTypeDistributionItem(key=k, value=round(v, 0)) for k, v in bucket_values.items()
+        AssetTypeDistributionItem(key=k, label=_bucket_label(k), value=round(v, 0))
+        for k, v in bucket_values.items()
     ]
 
     sorted_returns = sorted(return_items, key=lambda x: x[4], reverse=True)
     top5 = [
         RankedReturnItem(
             rank=i + 1,
-            symbol=(name if country_code == "KR" else symbol),
+            symbol=symbol,
             name=name,
             return_rate=round(rate, 2),
             village_ids=asset_villages.get(asset_id, []),
@@ -332,7 +351,7 @@ async def build_portfolio_summary(
     bottom5 = [
         RankedReturnItem(
             rank=i + 1,
-            symbol=(name if country_code == "KR" else symbol),
+            symbol=symbol,
             name=name,
             return_rate=round(rate, 2),
             village_ids=asset_villages.get(asset_id, []),

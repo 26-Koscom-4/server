@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
+from typing import Optional
+
 from sqlalchemy import BigInteger, Enum, Index, String, TIMESTAMP, text
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -17,6 +19,9 @@ class Village(Base, CreatedUpdatedMixin):
     village_id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(BigInteger, nullable=False)
     name: Mapped[str] = mapped_column(String(64), nullable=False)
+    icon: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    type: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
+    goal: Mapped[Optional[str]] = mapped_column(String(200), nullable=True)
     village_type: Mapped[str] = mapped_column(
         Enum("SYSTEM", "CUSTOM", name="village_type"),
         nullable=False,

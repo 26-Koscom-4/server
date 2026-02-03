@@ -24,6 +24,7 @@ class VillageReturnRate(BaseSchema):
 
 class AssetTypeDistributionItem(BaseSchema):
     key: str
+    label: str
     value: float
 
 
