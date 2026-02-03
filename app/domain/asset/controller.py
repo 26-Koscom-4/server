@@ -5,6 +5,7 @@ from app.core.database import get_db
 from app.domain.asset.schema.response import AvailableAssetItem, AvailableAssetsResponse
 from app.domain.asset.model import Asset
 from app.domain.portfolio.model import UserPortfolio
+from app.services.asset.monthly_prices import load_monthly_prices_for_year
 
 router = APIRouter()
 
@@ -47,3 +48,13 @@ def get_available_assets(
         for a in assets
     ]
     return AvailableAssetsResponse(user_id=user_id, available_assets=items)
+
+
+@router.post("/monthly-prices/generate")
+def generate_monthly_prices(
+    year: int = Query(2025),
+    db: Session = Depends(get_db),
+) -> dict:
+    """Fetch and store monthly prices for all assets for a given year."""
+    result = load_monthly_prices_for_year(db, year)
+    return {"year": year, **result}
