@@ -122,18 +122,13 @@ class VillageAssetsSection(BaseSchema):
     items: List[VillageAssetItem]
 
 
-class InvestmentProfile(BaseSchema):
-    investment_type: str
-    investment_goal: str
-
-
 class VillageSummary(BaseSchema):
     id: int
     name: str
     icon: Optional[str] = None
     metrics: VillageMetrics
     assets: VillageAssetsSection
-    investment_profile: InvestmentProfile
+    ai_one_liner: Optional[str] = None
 
 
 class ActionItem(BaseSchema):
@@ -145,7 +140,80 @@ class ActionItem(BaseSchema):
 class VillageSummaryResponse(BaseSchema):
     user_id: int
     village: VillageSummary
-    actions: Dict[str, ActionItem]
+
+
+class SummaryCardsDisplay(BaseSchema):
+    total_assets: str
+    current_return_rate: str
+    holding_count: str
+
+
+class SummaryCards(BaseSchema):
+    total_assets: float
+    current_return_rate: float
+    holding_count: int
+    display: SummaryCardsDisplay
+
+
+class MonthlyReturnItem(BaseSchema):
+    month: int
+    return_rate: float
+
+
+class MonthlyReturnTrend(BaseSchema):
+    title: str
+    unit: str
+    items: List[MonthlyReturnItem]
+
+
+class VillageOverviewDisplay(BaseSchema):
+    total_assets: str
+    return_rate: str
+    portfolio_weight: str
+
+
+class VillageOverview(BaseSchema):
+    title: str
+    total_assets: float
+    return_rate: float
+    portfolio_weight: float
+    display: VillageOverviewDisplay
+
+
+class HoldingDisplay(BaseSchema):
+    value: str
+    daily_change_rate: str
+
+
+class HoldingItem(BaseSchema):
+    asset_id: int
+    ticker: str
+    name: str
+    category: str
+    value: float
+    daily_change_rate: float
+    display: HoldingDisplay
+
+
+class HoldingsSection(BaseSchema):
+    title: str
+    items: List[HoldingItem]
+
+
+class VillageDetailHeader(BaseSchema):
+    id: int
+    name: str
+    icon: Optional[str] = None
+
+
+class VillageDetailResponse(BaseSchema):
+    user_id: int
+    village: VillageDetailHeader
+    summary_cards: SummaryCards
+    monthly_return_trend: MonthlyReturnTrend
+    village_overview: VillageOverview
+    holdings: HoldingsSection
+    ai_one_liner: Optional[str] = None
 
 
 class CreateVillageResponse(BaseSchema):
