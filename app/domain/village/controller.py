@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.domain.village.model import Village, VillageAsset
 from app.domain.village.schema.request import VillageCreateRequest
 from app.domain.village.schema.response import VillageCreateResponse
+from app.services.village.ai import generate_village_one_liner
 
 router = APIRouter()
 
@@ -12,6 +13,7 @@ router = APIRouter()
 @router.post("", response_model=VillageCreateResponse)
 def create_village(
     payload: VillageCreateRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ) -> VillageCreateResponse:
     village = Village(
@@ -31,4 +33,5 @@ def create_village(
     for a in payload.assets:
         db.add(VillageAsset(village_id=village.village_id, asset_id=a.asset_id))
     db.commit()
+    background_tasks.add_task(generate_village_one_liner, village.village_id)
     return VillageCreateResponse(village_id=village.village_id)
