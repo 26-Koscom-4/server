@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 from uuid import uuid5, NAMESPACE_URL
 
 from sqlalchemy.orm import Session
@@ -35,7 +35,7 @@ from app.services.briefing.agents.news_agent import (
 )
 from app.services.briefing.agents.orchestrator import orchestrate_briefing
 from app.services.briefing.agents.stock_agent import analyze_stock_data
-from app.services.market_data import MarketContext, TickerQuote, get_market_context
+from app.services.market_data import MarketContext, TickerQuote, get_market_context, get_usdkrw_rate
 
 logger = logging.getLogger(__name__)
 
@@ -174,6 +174,7 @@ async def generate_briefing(
         name_map=name_map,
         price_tickers=price_tickers,
     )
+    usdkrw_rate = get_usdkrw_rate()
     quotes_map = _extract_quotes_map(market_ctx.ticker_quotes or [])
     price_updates: Dict[int, float] = {}
 
@@ -181,7 +182,10 @@ async def generate_briefing(
         quote_symbol = asset_price_symbol_map.get(asset.asset_id, asset.symbol)
         quote = quotes_map.get(quote_symbol)
         if quote and quote.price is not None:
-            price_updates[asset.asset_id] = float(quote.price)
+            price = float(quote.price)
+            if asset.country_code == "US":
+                price *= usdkrw_rate
+            price_updates[asset.asset_id] = price
     _upsert_asset_prices(db, price_updates)
 
     asset_price_map = _load_asset_prices(db, [asset.asset_id for _p, asset in portfolio_rows])

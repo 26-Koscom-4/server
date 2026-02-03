@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from pydantic import ConfigDict
 
@@ -80,6 +80,72 @@ class VillageModalResponse(BaseSchema):
 
 class VillageCreateResponse(BaseSchema):
     village_id: int
+
+
+class CustomVillageItem(BaseSchema):
+    id: int
+    name: str
+    icon: Optional[str] = None
+    total_assets: float
+    return_rate: float
+    portfolio_weight: float
+    asset_tickers: List[str]
+
+
+class CustomVillagesResponse(BaseSchema):
+    user_id: int
+    filter: str
+    villages: List[CustomVillageItem]
+
+
+class VillageMetricsDisplay(BaseSchema):
+    total_assets: str
+    return_rate: str
+    portfolio_weight: str
+
+
+class VillageMetrics(BaseSchema):
+    total_assets: float
+    return_rate: float
+    portfolio_weight: float
+    display: VillageMetricsDisplay
+
+
+class VillageAssetItem(BaseSchema):
+    asset_id: int
+    ticker: str
+    name: str
+
+
+class VillageAssetsSection(BaseSchema):
+    count: int
+    items: List[VillageAssetItem]
+
+
+class InvestmentProfile(BaseSchema):
+    investment_type: str
+    investment_goal: str
+
+
+class VillageSummary(BaseSchema):
+    id: int
+    name: str
+    icon: Optional[str] = None
+    metrics: VillageMetrics
+    assets: VillageAssetsSection
+    investment_profile: InvestmentProfile
+
+
+class ActionItem(BaseSchema):
+    label: str
+    action: str
+    target: Optional[str] = None
+
+
+class VillageSummaryResponse(BaseSchema):
+    user_id: int
+    village: VillageSummary
+    actions: Dict[str, ActionItem]
 
 
 class CreateVillageResponse(BaseSchema):

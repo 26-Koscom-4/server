@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.domain.asset.schema.response import AvailableAssetItem, AvailableAssetsResponse
 from app.domain.asset.model import Asset
+from app.domain.portfolio.model import UserPortfolio
 
 router = APIRouter()
 
@@ -29,7 +30,13 @@ def get_available_assets(
     user_id: int = Query(...),
     db: Session = Depends(get_db),
 ) -> AvailableAssetsResponse:
-    assets = db.query(Asset).order_by(Asset.asset_id.asc()).all()
+    assets = (
+        db.query(Asset)
+        .join(UserPortfolio, UserPortfolio.asset_id == Asset.asset_id)
+        .filter(UserPortfolio.user_id == user_id)
+        .order_by(Asset.asset_id.asc())
+        .all()
+    )
     items = [
         AvailableAssetItem(
             asset_id=a.asset_id,

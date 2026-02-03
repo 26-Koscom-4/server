@@ -9,6 +9,30 @@ from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
+_USDKRW_CACHE: Dict[str, Any] = {"rate": None, "ts": 0.0}
+
+
+def get_usdkrw_rate() -> float:
+    """Fetch USD→KRW exchange rate with basic caching."""
+    now = time.time()
+    if _USDKRW_CACHE["rate"] and now - _USDKRW_CACHE["ts"] < 300:
+        return float(_USDKRW_CACHE["rate"])
+    try:
+        import requests
+
+        resp = requests.get(
+            "https://api.exchangerate.host/latest?base=USD&symbols=KRW",
+            timeout=5,
+        )
+        data = resp.json()
+        rate = float(data["rates"]["KRW"])
+        _USDKRW_CACHE["rate"] = rate
+        _USDKRW_CACHE["ts"] = now
+        return rate
+    except Exception as e:
+        logger.warning("USDKRW fetch failed: %s", e)
+        return 1.0
+
 # RSS 피드 URL 설정 (Google News)
 RSS_FEEDS = {
     "google_news_kr": "https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko",
