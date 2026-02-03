@@ -1,23 +1,17 @@
-from typing import Optional
-
-from pydantic import ConfigDict
+from typing import List, Optional
 
 from app.domain.common.schema.dto import BaseSchema
 
 
-class CreateVillageRequest(BaseSchema):
-    villageId: Optional[str] = None
-    name: Optional[str] = None
+class VillageAssetRef(BaseSchema):
+    asset_id: int
+
+
+class VillageCreateRequest(BaseSchema):
+    user_id: int
+    name: str
     icon: Optional[str] = None
     type: Optional[str] = None
     goal: Optional[str] = None
-
-    model_config = ConfigDict(
-        extra="forbid",
-        json_schema_extra={
-            "examples": [
-                {"villageId": "village-commodities"},
-                {"name": "Commodities Village", "icon": "C", "type": "commodities"},
-            ]
-        },
-    )
+    assets: List[VillageAssetRef]
+    strategy_items: List[str]

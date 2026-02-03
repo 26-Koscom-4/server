@@ -78,6 +78,10 @@ class VillageModalResponse(BaseSchema):
     )
 
 
+class VillageCreateResponse(BaseSchema):
+    village_id: int
+
+
 class CreateVillageResponse(BaseSchema):
     status: str
     payload: Dict[str, Any]
