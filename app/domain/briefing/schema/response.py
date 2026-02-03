@@ -1,110 +1,80 @@
-from typing import Any, Dict, List
+from typing import Literal
 
 from pydantic import ConfigDict
 
-from app.domain.briefing.schema.dto import BriefingCard, SelectedVillage, Selector
+from app.domain.briefing.schema.dto import (
+    AIAdvice,
+    AssetDailyChanges,
+    AssetTotalReturns,
+    LatestNews,
+    PortfolioSummary,
+    VillageDailyChange,
+    VillageInfo,
+)
 from app.domain.common.schema.dto import BaseSchema
 
 
-class LatestBriefingResponse(BaseSchema):
-    """GET /briefing 응답: 가장 최근에 생성된 브리핑 (한국어)."""
-
-    summary: str
-    generated_at: str
-    news_count: int
-    tickers: List[str]
-
-    model_config = ConfigDict(
-        extra="forbid",
-        json_schema_extra={
-            "examples": [
-                {
-                    "summary": "오늘의 투자 포인트: 엔비디아 실적 기대감으로 반도체 섹터 상승. ...",
-                    "generated_at": "2025-01-15T09:00:00",
-                    "news_count": 12,
-                    "tickers": ["AAPL", "NVDA"],
-                }
-            ]
-        },
-    )
-
-
 class BriefingGenerateResponse(BaseSchema):
-    """TTS용 스크립트 + 개미 아침 브리핑 카드 UI 구조."""
+    """개미 마을 브리핑 응답."""
 
-    voice_script: str  # TTS 엔진이 읽을 순수 텍스트 (음성으로 듣기)
-    briefing_card: BriefingCard  # 화면 카드: 헤더, 마을 현황, 자산 분석, 전략, 조언, 체크리스트
+    user_id: int
+    time_slot: Literal["morning", "evening"]
+    village: VillageInfo
+    portfolio_summary: PortfolioSummary
+    village_daily_change: VillageDailyChange
+    asset_total_returns: AssetTotalReturns
+    asset_daily_changes: AssetDailyChanges
+    latest_news: LatestNews
+    ai_advice: AIAdvice
 
     model_config = ConfigDict(
         extra="forbid",
         json_schema_extra={
             "examples": [
                 {
-                    "voice_script": "주인님, 좋은 아침입니다! 미장마을의 현재 상황을 알려드립니다.",
-                    "briefing_card": {
-                        "header": {"title": "개미 아침 브리핑", "subtitle": "마을별 대표 개미를 선택하고 브리핑을 들어보세요"},
-                        "village": {"id": "village-us", "name": "미장마을", "icon": "🇺🇸", "briefing_title": "미장마을 브리핑"},
-                        "status": {
-                            "intro_sentence": "주인님, 좋은 아침입니다! 미장마을의 현재 상황을 알려드립니다.",
-                            "total_assets": 15000000,
-                            "return_rate": 12.5,
-                            "portfolio_weight": 32.3,
+                    "user_id": 1,
+                    "time_slot": "morning",
+                    "village": {"id": "2f6f1c2c-5bdf-4e72-9e0a-0d9f2d1f2e11", "name": "배당마을", "icon": "💰"},
+                    "portfolio_summary": {
+                        "total_return_rate": 8.3,
+                        "total_profit_value": 613112,
+                        "total_assets_value": 8000000,
+                        "display": {
+                            "total_return_rate": "+8.3%",
+                            "total_profit_value": "+613,112원",
+                            "total_assets_value": "8,000,000원",
                         },
-                        "asset_analysis": [
-                            {"ticker": "AAPL", "type": "기술주", "status": "안정적으로 운영 중입니다."},
+                    },
+                    "village_daily_change": {"daily_change_rate": 0.69, "display": "+0.69%"},
+                    "asset_total_returns": {
+                        "title": "보유 종목별 총 수익률",
+                        "items": [
+                            {"ticker": "O", "name": "Realty Income", "total_return_rate": 0.71, "display": "+0.71%"},
                         ],
-                        "strategy": {"investment_type": "성장형", "investment_goal": "장기 투자"},
-                        "advice": ["성장주는 장기적인 관점에서 접근하세요. 단기 변동성에 흔들리지 마세요.", "✓ 기술주 중심 포트폴리오입니다. 실적 발표 시즌을 주목하세요."],
-                        "checklist": ["✓ 시장 변동성 모니터링", "✓ 주요 뉴스 확인", "✓ 리밸런싱 필요 여부 검토"],
                     },
-                }
-            ]
-        },
-    )
-
-
-# 기존 fixture 기반 GET /briefing 응답 (유지)
-class BriefingResponse(BaseSchema):
-    selector: Selector
-    typeTextMap: Dict[str, str]
-    goalTextMap: Dict[str, str]
-    adviceMap: Dict[str, str]
-    marketAdviceMap: Dict[str, str]
-    selectedVillage: SelectedVillage
-
-    model_config = ConfigDict(
-        extra="forbid",
-        json_schema_extra={
-            "examples": [
-                {
-                    "selector": {
-                        "villages": [
-                            {
-                                "id": "village-us",
-                                "name": "US Village",
-                                "icon": "US",
-                                "returnRate": 12.5,
-                            }
-                        ]
+                    "asset_daily_changes": {
+                        "title": "보유 종목별 전일대비 등락",
+                        "items": [
+                            {"ticker": "O", "name": "Realty Income", "daily_change_rate": 0.79, "display": "+0.79%"},
+                        ],
                     },
-                    "typeTextMap": {"growth": "Growth"},
-                    "goalTextMap": {"long-term": "Long-term"},
-                    "adviceMap": {"growth": "Stay the course."},
-                    "marketAdviceMap": {"growth": "Tech momentum is strong."},
-                    "selectedVillage": {
-                        "id": "village-us",
-                        "name": "US Village",
-                        "icon": "US",
-                        "totalValue": 15000000,
-                        "returnRate": 12.5,
-                        "allocation": 32.3,
-                        "assets": [
+                    "latest_news": {
+                        "title": "마을 최신 뉴스",
+                        "items": [
                             {
-                                "id": "AAPL",
-                                "name": "AAPL",
-                                "type": "Tech",
-                                "ticker": "AAPL",
+                                "news_id": "c1b2d3e4-1111-2222-3333-444444444444",
+                                "title": "고배당 ETF 자금 유입 증가",
+                                "summary": "금리 인하 기대감과 함께 고배당 ETF로의 자금 유입이 크게 증가하고 있습니다.",
+                                "published_ago": "1시간 전",
+                                "url": "https://finance.yahoo.com/news/dividend-etf-inflow",
                             }
+                        ],
+                    },
+                    "ai_advice": {
+                        "title": "오늘의 AI 조언",
+                        "bullets": [
+                            "배당주는 꾸준한 현금 흐름을 제공합니다. 배당락일을 체크하세요.",
+                            "배당락일 3일 전입니다. 배당 수익 예상액을 확인하세요.",
                         ],
                     },
                 }
