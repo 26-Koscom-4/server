@@ -99,6 +99,20 @@ def _classify_bucket(asset: Asset) -> List[str]:
     return keys or ["other"]
 
 
+def _bucket_label(key: str) -> str:
+    return {
+        "tech": "기술주",
+        "growth": "성장",
+        "us_stocks": "미국주식",
+        "kr_stocks": "한국주식",
+        "dividend_etf": "배당 ETF",
+        "leveraged_etf": "레버리지 ETF",
+        "growth_etf": "성장 ETF",
+        "etf": "ETF",
+        "other": "기타",
+    }.get(key, key)
+
+
 def _weighted_daily_change(items: List[Tuple[float, float]]) -> float:
     total_value = sum(v for _r, v in items if v > 0)
     if total_value > 0:
@@ -318,14 +332,15 @@ async def build_portfolio_summary(
         village_allocations[v.village_id] = v_total
 
     asset_type_distribution = [
-        AssetTypeDistributionItem(key=k, value=round(v, 0)) for k, v in bucket_values.items()
+        AssetTypeDistributionItem(key=k, label=_bucket_label(k), value=round(v, 0))
+        for k, v in bucket_values.items()
     ]
 
     sorted_returns = sorted(return_items, key=lambda x: x[4], reverse=True)
     top5 = [
         RankedReturnItem(
             rank=i + 1,
-            symbol=(name if country_code == "KR" else symbol),
+            symbol=symbol,
             name=name,
             return_rate=round(rate, 2),
             village_ids=asset_villages.get(asset_id, []),
@@ -336,7 +351,7 @@ async def build_portfolio_summary(
     bottom5 = [
         RankedReturnItem(
             rank=i + 1,
-            symbol=(name if country_code == "KR" else symbol),
+            symbol=symbol,
             name=name,
             return_rate=round(rate, 2),
             village_ids=asset_villages.get(asset_id, []),
