@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import BigInteger, Enum, Index, String, TIMESTAMP, DECIMAL, func
+from sqlalchemy import BigInteger, Enum, Index, String, TIMESTAMP, DECIMAL, func, Date
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.domain.common.model import Base, CreatedUpdatedMixin
@@ -36,4 +36,13 @@ class AssetPrice(Base):
     )
 
 
-__all__ = ["Asset", "AssetPrice"]
+class AssetPriceMonthly(Base):
+    __tablename__ = "asset_price_monthly"
+    __table_args__ = (Index("idx_asset_price_month", "month"),)
+
+    asset_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    month: Mapped[datetime] = mapped_column(Date, primary_key=True)
+    close_price: Mapped[Decimal] = mapped_column(DECIMAL(24, 8), nullable=False)
+
+
+__all__ = ["Asset", "AssetPrice", "AssetPriceMonthly"]

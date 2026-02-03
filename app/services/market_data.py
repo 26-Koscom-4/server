@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+import os
 import time
 import urllib.parse
 from dataclasses import dataclass, field
@@ -13,25 +14,8 @@ _USDKRW_CACHE: Dict[str, Any] = {"rate": None, "ts": 0.0}
 
 
 def get_usdkrw_rate() -> float:
-    """Fetch USD→KRW exchange rate with basic caching."""
-    now = time.time()
-    if _USDKRW_CACHE["rate"] and now - _USDKRW_CACHE["ts"] < 300:
-        return float(_USDKRW_CACHE["rate"])
-    try:
-        import requests
-
-        resp = requests.get(
-            "https://api.exchangerate.host/latest?base=USD&symbols=KRW",
-            timeout=5,
-        )
-        data = resp.json()
-        rate = float(data["rates"]["KRW"])
-        _USDKRW_CACHE["rate"] = rate
-        _USDKRW_CACHE["ts"] = now
-        return rate
-    except Exception as e:
-        logger.warning("USDKRW fetch failed: %s", e)
-        return 1.0
+    """Fixed USD→KRW exchange rate."""
+    return 1450.0
 
 # RSS 피드 URL 설정 (Google News)
 RSS_FEEDS = {
@@ -82,16 +66,26 @@ def _fetch_ticker_quote(ticker: str) -> TickerQuote:
         t = yf.Ticker(ticker)
         hist = t.history(period="5d", interval="1d")
         if hist is None or hist.empty:
+            logger.warning("yfinance empty history: ticker=%s", ticker)
             return TickerQuote(ticker=ticker)
         closes = hist["Close"]
         if len(closes) < 2:
             price = float(closes.iloc[-1]) if len(closes) else None
+            logger.warning("yfinance insufficient history: ticker=%s price=%s", ticker, price)
             return TickerQuote(ticker=ticker, price=price, previous_close=price, change_percent=0.0)
         current = float(closes.iloc[-1])
         previous = float(closes.iloc[-2])
         change_pct = ((current - previous) / previous * 100.0) if previous else None
         info = t.info or {}
         currency = info.get("currency") or "USD"
+        logger.warning(
+            "yfinance quote ok: ticker=%s price=%s prev=%s change=%s currency=%s",
+            ticker,
+            current,
+            previous,
+            change_pct,
+            currency,
+        )
         return TickerQuote(
             ticker=ticker,
             price=current,
@@ -160,7 +154,8 @@ def _get_market_context_sync(
 ) -> MarketContext:
     """동기: 모든 ticker에 대해 시세·뉴스 수집. 실패한 ticker는 건너뜀."""
     tickers = [t for t in tickers if t]
-    if not tickers:
+    price_tickers = [t for t in (price_tickers or []) if t]
+    if not tickers and not price_tickers:
         return MarketContext()
 
     quotes: List[TickerQuote] = []
